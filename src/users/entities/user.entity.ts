@@ -3,27 +3,30 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeor
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
-    user_id!: number;
+    user_id: number;
 
     @Column()
-    fullname!: string;
+    first_name: string;
+
+    @Column()
+    last_name: string;
 
     @Column({unique: true})
-    email!: string;
+    email: string;
 
     @Column({ select: false }) // Hides password by default when fetching users
-    password!: string;
+    password: string;
 
     @Column({ default: 'customer' })
-    role!: string;
+    role: string;
 
     @Column({ nullable: true })
-    phone_number?: string;
+    phone_number: string;
 
     @Column({ type: 'text', nullable: true })
-    address?: string;
+    address: string;
 
     @CreateDateColumn()
-    created_at!: Date;
+    created_at: Date;
 }
 

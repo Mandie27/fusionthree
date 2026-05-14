@@ -12,7 +12,22 @@ export class AuthService {
   ) {}
   
   async register(dto: RegisterDto){
-    return this.usersService.create(dto);
+    const user = await this.usersService.create(dto);
+
+    const payload = { 
+      sub: user.user_id, 
+      email: user.email 
+    };
+    return {
+      access_token: await this.jwtService.signAsync(payload),
+      user: {
+        user_id: user.user_id,
+        fullname: `${user.first_name} ${user.last_name}`,
+        email: user.email,
+        role: user.role,
+        phone_number: user.phone_number,
+      }
+    }; 
   }
   
   async login(email: string, password: string) {
@@ -42,6 +57,13 @@ export class AuthService {
     };
     return {
       access_token: await this.jwtService.signAsync(payload),
+      user: {
+        user_id: user.user_id,
+        fullname: `${user.first_name} ${user.last_name}`,
+        email: user.email,
+        role: user.role,
+        phone_number: user.phone_number,
+      }
     };
   }
 }
