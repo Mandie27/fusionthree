@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString, MinLength } from "class-validator";
+import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsPhoneNumber, IsString, MinLength } from "class-validator";
+import { Role } from "../roles/role.enum";
 
 export class RegisterDto {
  @IsEmail()
@@ -15,4 +16,8 @@ last_name: string;
  @IsString()
  @MinLength(8)
  password: string;
+
+ @IsEnum(Role)
+ @IsOptional()
+ role: Role;
 }

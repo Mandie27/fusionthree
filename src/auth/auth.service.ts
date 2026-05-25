@@ -14,9 +14,9 @@ export class AuthService {
   async register(dto: RegisterDto){
     const user = await this.usersService.create(dto);
 
-    const payload = { 
-      sub: user.user_id, 
-      email: user.email 
+    const payload = {email: user.email,
+      sub: user.user_id,
+      role: user.role
     };
     return {
       access_token: await this.jwtService.signAsync(payload),
@@ -51,9 +51,10 @@ export class AuthService {
       throw new UnauthorizedException('User not found');
     }
 
-    const payload = { 
-      sub: user.user_id, 
-      email: user.email 
+    const payload = {
+      email: user.email,
+      sub: user.user_id,
+      role: user.role
     };
     return {
       access_token: await this.jwtService.signAsync(payload),
