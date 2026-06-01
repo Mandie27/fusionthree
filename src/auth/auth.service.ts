@@ -11,8 +11,8 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
   
-  async register(dto: RegisterDto){
-    const user = await this.usersService.create(dto);
+  async register(registerDto: RegisterDto){
+    const user = await this.usersService.create(registerDto);
 
     const payload = {email: user.email,
       sub: user.user_id,

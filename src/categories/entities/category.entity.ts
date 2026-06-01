@@ -4,14 +4,17 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } f
 @Entity('categories')
 export class Category {
     @PrimaryGeneratedColumn()
-    category_id!: number;
+    category_id: number;
     
-    @Column()
-    category_name!: string;
+    @Column({unique: true})
+    category_name: string;
     
     @Column({ type: 'text', nullable: true })
-    description?: string;
+    description: string;
+
+    @CreateDateColumn()
+    created_at: Date;
 
     @OneToMany(() => Product, (product) => product.category)
-    products!: Product[];
+    products: Product[];
 }

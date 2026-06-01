@@ -12,10 +12,10 @@ import { RolesGuard } from 'src/auth/roles/roles.guard';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   
-  @Post()
-  create(@Body() registerDto: RegisterDto) {
-    return this.usersService.create(registerDto);
-  }
+  // @Post()
+  // create(@Body() registerDto: RegisterDto) {
+  //   return this.usersService.create(registerDto);
+  // }
 
   @Get()
   @Roles(Role.Admin)

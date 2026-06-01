@@ -16,8 +16,4 @@ last_name: string;
  @IsString()
  @MinLength(8)
  password: string;
-
- @IsEnum(Role)
- @IsOptional()
- role: Role;
 }

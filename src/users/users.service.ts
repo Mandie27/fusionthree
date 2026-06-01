@@ -14,14 +14,14 @@ export class UsersService {
   ) {}
 
 
-  async create(dto: RegisterDto) {
+  async create(registerDto: RegisterDto) {
     const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(dto.password, salt);
+    const hashedPassword = await bcrypt.hash(registerDto.password, salt);
 
     const newUser = this.userRepository.create({
-      ...dto,
+      ...registerDto,
       password: hashedPassword,
-      role: dto.role || 'customer'
+      role: 'customer'
     });
 
     return await this.userRepository.save(newUser);
